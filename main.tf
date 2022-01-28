@@ -16,7 +16,9 @@ resource "azurerm_resource_group" "myresourcegroup" {
   location = var.location
 
   tags = {
-    environment = "Production"
+    environment = "Production",
+    Billable = "true",
+    Department = "devops"
   }
 }
 
@@ -108,11 +110,6 @@ resource "azurerm_virtual_machine" "catapp" {
   location            = var.location
   resource_group_name = azurerm_resource_group.myresourcegroup.name
   vm_size             = var.vm_size
-
-  tags = {
-    Billable = "true",
-    Department = "devops"
-  }
 
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
